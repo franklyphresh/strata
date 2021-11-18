@@ -22,13 +22,6 @@ const config = {
       '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
-        docs: {
-          remarkPlugins: [math, plantuml],
-          rehypePlugins: [katex],
-          sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/StrataFoundation/strata/edit/master/packages/docs',
-        },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
@@ -101,32 +94,12 @@ const config = {
           src: 'img/logo.png',
         },
         items: [
-          {
-            type: 'doc',
-            docId: 'getting_started',
-            position: 'left',
-            label: 'Docs',
-          },
-          {to: '/blog', label: 'Blog', position: 'left'},
-          {
-            href: 'https://github.com/StrataFoundation/strata',
-            label: 'GitHub',
-            position: 'right',
-          },
+          {to: '/blog', label: 'Blog', position: 'left'}
         ],
       },
       footer: {
         style: 'dark',
         links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/getting_started',
-              },
-            ],
-          },
           {
             title: 'Community',
             items: [

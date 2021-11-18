@@ -16,9 +16,9 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--primary button--lg"
-            to="/docs/getting_started"
+            to="/blog/wumbo-beta-dist"
           >
-            Strata Tutorial - 5min ⏱️
+            Exchange your Net bWUM
           </Link>
         </div>
       </div>
