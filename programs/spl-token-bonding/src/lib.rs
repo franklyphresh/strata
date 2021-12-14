@@ -17,6 +17,7 @@ declare_id!("TBondz6ZwSM5fs4v2GpnVBMuwoncPkFLFR9S422ghhN");
 pub mod spl_token_bonding {
   use std::borrow::{Borrow, BorrowMut};
   use anchor_spl::token::TokenAccount;
+use spl_token::instruction::AuthorityType;
   use super::*;
 
     pub fn initialize_sol_storage_v0(
@@ -558,6 +559,18 @@ pub mod spl_token_bonding {
         ), base_royalties)?;
       }
 
+      Ok(())
+    }
+
+    pub fn upgrade_base_storage_authority(ctx: Context<UpgradeBaseStorageAuthority>) -> ProgramResult {
+      token::set_authority(CpiContext::new_with_signer(
+        ctx.accounts.token_program.to_account_info(),
+        SetAuthority {
+          current_authority: ctx.accounts.base_storage_authority.to_account_info(),
+          account_or_mint: ctx.accounts.base_storage.to_account_info()
+        },
+        &[&[b"storage-authority", ctx.accounts.token_bonding.key().as_ref(), &[ctx.accounts.token_bonding.base_storage_authority_bump_seed.unwrap()]]]
+      ), AuthorityType::AccountOwner, Some(ctx.accounts.token_bonding.key()))?;
       Ok(())
     }
 }

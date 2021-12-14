@@ -323,3 +323,20 @@ pub struct SellV0<'info> {
   pub token_program: Program<'info, Token>,
   pub clock: Sysvar<'info, Clock>,
 }
+
+// A temporary call to upgrade from the pda source authority to the bonding
+#[derive(Accounts)]
+pub struct UpgradeBaseStorageAuthority<'info> {
+  #[account(
+    has_one = base_storage
+  )]
+  pub token_bonding: Account<'info, TokenBondingV0>,
+  #[account(mut)]
+  pub base_storage: Account<'info, TokenAccount>,
+  #[account(
+    seeds = [b"storage-authority", token_bonding.key().as_ref()],
+    bump = token_bonding.base_storage_authority_bump_seed.unwrap()
+  )]
+  pub base_storage_authority: AccountInfo<'info>,
+  pub token_program: Program<'info, Token>
+}
